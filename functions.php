@@ -124,7 +124,7 @@ function theme_functions() {
 }
 
 $args = array(
-	'name'          => __( 'Sidebar name', 'theme_text_domain' ),
+	'name'          => __( 'Sidebar name', 'TripleC' ),
 	'id'            => 'unique-sidebar-id',
 	'description'   => '',
         'class'         => '',
