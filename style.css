@@ -1,14 +1,13 @@
 /*
 Theme Name: TripleC
 Author: CairoCorps Consulting
-Theme URI: 
 Description: TripeC WordPress Theme by CairoCorps Consulting
 Version: 1.0
 Author URI: http://www.cairocorps.com
 License: MIT License
 License URI: https://raw.githubusercontent.com/CairoCorps/TripleC/master/LICENSE
-Tags: custom-background, custom-colors
 Text Domain: TripleC
+Tags: responsive, slider, home slider, blogging, theme, custom-background, custom-colors
 */
 body { text-align: center; font-family: 'Open Sans', sans-serif; }
 body.home.blog {
@@ -477,7 +476,7 @@ a.back-to-top {
 	z-index: 999;
 	right: 20px;
 	bottom: 20px;
-	background: #27AE61 url("/theme1/wp-content/uploads/2017/03/up-arrow.png") no-repeat center 43%;
+	background: #27AE61 url("wp-content/uploads/2017/03/up-arrow.png") no-repeat center 43%;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
 	border-radius: 30px;
@@ -552,11 +551,11 @@ ul#menu-menu li{
  .class_checkbox {
     width: 50px;  
     height: 50px;
-    background-image: url(/theme1/wp-content/uploads/2017/03/menu-open.png);
+    background-image: url('wp-content/uploads/2017/03/menu-open.png');
 	float:right;
 }
 .class_checkbox.checked {
-    background-image: url(/theme1/wp-content/uploads/2017/03/menu-close.png);
+    background-image: url('wp-content/uploads/2017/03/menu-close.png');
 }
 #footer{float:left;}
 #cont, .third, #footer-sidebar1, #footer-sidebar2, #footer-sidebar3, #footer-sidebar, #side-sidebar, #side-sidebar1, #side-sidebar2
