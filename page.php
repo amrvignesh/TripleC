@@ -14,5 +14,6 @@
 </div>
 		</div> <!-- /.col -->
 	</div> <!-- /.row -->
-
+<?php comments_template(); ?> 
+<?php wp_list_comments();?>
 <?php get_footer(); ?>

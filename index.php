@@ -31,13 +31,16 @@
 			     }
 			 endwhile; endif; ?>
 			</div>
-			<a href="#" class="prev"><img src="<?php bloginfo('template_directory')?>/images/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
-			<a href="#" class="next"><img src="<?php bloginfo('template_directory')?>/images/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>
+			<a href="#" class="prev"><img src="<?php echo esc_url( get_template_directory_uri() )?>/images/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
+			<a href="#" class="next"><img src="<?php echo esc_url( get_template_directory_uri() )?>/images/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>
+		
 		</div>
+		
 		<div id="cont">
 <div class="ttile"><h1> Recent Post</h1></div>
 <?php get_the_post_thumbnail( $post_id );?>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <div class="third">
 <a href="<?php the_post_thumbnail_url( $size ); ?>">
 <?php
@@ -49,6 +52,7 @@ if ( has_post_thumbnail() ) {
 <p><?php the_excerpt(); ?></p>
 <h4>Posted on <?php the_time('F jS, Y') ?></h4>
 <h4>Posted by <?php the_author(); ?></h4>
+<h4><?php echo the_tags();?></h4>
 
 <?php 
 foreach(get_the_category() as $category)
@@ -57,12 +61,13 @@ foreach(get_the_category() as $category)
 }
 ?>
 
-</div>
+</div></div>
  <?php endwhile; else: ?>
-<p><?php _e('Sorry, no posts matched your criteria.'); ?></p><?php endif; ?>
+<p><?php _e('Sorry, no posts matched your criteria.','TripleC'); ?></p><?php endif; ?>
 </div>
 
 <div class="slled2">
+
 <div id="cont">
 <?php query_posts('category_name=sports&showposts=6');
 $category_name="sports";
@@ -73,7 +78,7 @@ while (have_posts()) : the_post();
   // do whatever you want
 
 ?>
-
+<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <div class="third white">
 <a href="<?php the_permalink() ?>" title="Permanent Link to <?php the_title(); ?>"><h2><?php the_title(); ?></h2></a>
 <p><?php the_excerpt(); ?></p>
@@ -83,19 +88,20 @@ endwhile;
 ?>
 </div>
 </div>
+</div>
 
 <div class="slled3">
 <div id="cont">
 <?php query_posts('category_name=state&showposts=6');
 $category_name="state";
 ?>
-<div class="catt-title black"><a href="/theme1/category/state/"><h2><?php echo $category_name; ?></h2></a></div>
+<div class="catt-title black"><a href="/theme1/category/state/" ><h2 class="colo"><?php echo $category_name; ?></h2></a></div>
 <?php 
 while (have_posts()) : the_post();
   // do whatever you want
 
 ?>
-
+<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <div class="third black">
 <a href="<?php the_permalink() ?>" title="Permanent Link to <?php the_title(); ?>"><h2><?php the_title(); ?></h2></a>
 <p><?php the_excerpt(); ?></p>
@@ -103,6 +109,7 @@ while (have_posts()) : the_post();
 <?php
 endwhile;
 ?>
+</div>
 </div>
 </div>
 <div class="slled2">
@@ -116,7 +123,7 @@ while (have_posts()) : the_post();
   // do whatever you want
 
 ?>
-
+<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 <div class="third white">
 <a href="<?php the_permalink() ?>" title="Permanent Link to <?php the_title(); ?>"><h2><?php the_title(); ?></h2></a>
 <p><?php the_excerpt(); ?></p>
@@ -124,6 +131,7 @@ while (have_posts()) : the_post();
 <?php
 endwhile;
 ?>
+</div>
 </div>
 </div>
 <?php get_sidebar(); ?>

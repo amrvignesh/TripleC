@@ -26,6 +26,7 @@ dynamic_sidebar('footer-sidebar-3');
 </div>
 </div>
 <?php echo wp_footer(); ?>
+<?php echo comicpress_copyright(); ?>
 
 <script type="text/javascript">
 	$('body').prepend('<a href="#" class="back-to-top">Back to Top</a>');

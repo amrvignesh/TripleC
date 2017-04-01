@@ -1,6 +1,7 @@
 
 <div id="sidebar">
 <div id="side-sidebar">
+<?php get_sidebar( 'side-sidebar' ); ?>
 <?php
 if(is_active_sidebar('side-sidebar')){
 dynamic_sidebar('side-sidebar');
@@ -21,6 +22,6 @@ dynamic_sidebar('side-sidebar-2');
 }
 ?>
 </div>
-
+<?php register_sidebar( $args ); ?>
 
 </div>
