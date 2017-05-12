@@ -1,5 +1,17 @@
 <?php
-function register_my_menus() {
+add_action( 'wp_head', 'triplec_my_assets' );
+
+function triplec_my_assets() {
+    wp_enqueue_style('triplec-stylesheet',  get_stylesheet_uri());
+	wp_enqueue_script( 'jq', get_template_directory_uri().'/js/triplec-jquery.js' );
+	wp_enqueue_script( 'easing', get_template_directory_uri().'/js/triplec-jquery.easing.js', array( 'jquery' ), '1.3' );
+	wp_enqueue_script( 'slides', get_template_directory_uri().'/js/triplec-slides.min.jquery.js', array( 'jquery', 'easing' ) );
+	wp_enqueue_script( 'slider', get_template_directory_uri().'/js/triplec-slider.js', array( 'jquery', 'easing', 'slides' ) );
+	wp_enqueue_script( 'scroll', get_template_directory_uri().'/js/triplec-scrolldown.js', array( 'jquery', 'easing', 'slides','slider' ) );
+}
+
+
+function triplec_register_my_menus() {
   register_nav_menus(
     array(
       'header-menu' => __( 'Header Menu','triplec' ),
@@ -7,20 +19,11 @@ function register_my_menus() {
     )
   );
 }
-add_action( 'init', 'register_my_menus' );
+add_action( 'init', 'triplec_register_my_menus' );
 
 add_theme_support( 'post-thumbnails' ); 
 
-function blm_init_method() {
-	/* Enqueue custom Javascript here using wp_enqueue_script(). 
-	http://codex.wordpress.org/Function_Reference/wp_enqueue_script*/
-	
-	    wp_enqueue_script( 'jquery' );
-	    wp_enqueue_script( 'easing', get_template_directory_uri().'/js/jquery.easing.js', array( 'jquery' ), '1.3' );
-	    wp_enqueue_script( 'slides', get_template_directory_uri().'/js/slides.min.jquery.js', array( 'jquery', 'easing' ) );
 
-	}
-	add_action('wp_enqueue_scripts', 'blm_init_method');
 	
 	function themeslug_theme_customizer( $wp_customize ) {
 		
@@ -29,7 +32,7 @@ function blm_init_method() {
     'priority'    => 30,
     'description' => 'Upload a logo to replace the default site name and description in the header',
 ) );
-   $wp_customize->add_setting( 'themeslug_logo', 'sanitize_callback' => 'esc_attr' );
+   $wp_customize->add_setting( 'themeslug_logo', 'sanitize_callback' );
    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'themeslug_logo', array(
     'label'    => __( 'Logo', 'triplec' ),
     'section'  => 'themeslug_logo_section',
@@ -39,6 +42,7 @@ function blm_init_method() {
 add_action( 'customize_register', 'themeslug_theme_customizer' );
 
 /*footer*/
+function triplec_widgets_init(){
 register_sidebar( array(
 'name' => 'Footer Sidebar 1',
 'id' => 'footer-sidebar-1',
@@ -94,17 +98,19 @@ register_sidebar( array(
 'after_title' => '</h3>',
 ) );
 
-
-function add_taxonomies_to_pages() {
+}
+add_action( 'widgets_init', 'triplec_widgets_init' );
+function triplec_add_taxonomies_to_pages() {
  register_taxonomy_for_object_type( 'post_tag', 'page' );
  register_taxonomy_for_object_type( 'category', 'page' );
  }
-add_action( 'init', 'add_taxonomies_to_pages' );
+add_action( 'init', 'triplec_add_taxonomies_to_pages' );
+
  if ( ! is_admin() ) {
- add_action( 'pre_get_posts', 'category_and_tag_archives' );
+ add_action( 'pre_get_posts', 'triplec_category_and_tag_archives' );
  
  }
-function category_and_tag_archives( $wp_query ) {
+function triplec_category_and_tag_archives( $wp_query ) {
 $my_post_array = array('post','page');
  
  if ( $wp_query->get( 'category_name' ) || $wp_query->get( 'cat' ) )
@@ -116,15 +122,29 @@ $my_post_array = array('post','page');
 if ( ! isset( $content_width ) ) {
 	$content_width = 600;
 }
-add_action( 'after_setup_theme', 'theme_functions' );
-function theme_functions() {
+
+function triplec_theme_functions() {
 
     add_theme_support( 'title-tag' );
 
 }
+add_action( 'after_setup_theme', 'triplec_theme_functions' );
+
+$comments_args = array(
+        // change the title of send button 
+        'label_submit'=>'Send',
+        // change the title of the reply section
+        'title_reply'=>'Write a Reply or Comment',
+        // remove "Text or HTML to be displayed after the set of comment fields"
+        'comment_notes_after' => '',
+        // redefine your own textarea (the comment body)
+        'comment_field' => '<p class="comment-form-comment"><label for="comment">' . __( 'Comment', 'triplec' ) . '</label><br /><textarea id="comment" name="comment" aria-required="true"></textarea></p>',
+);
+
+comment_form($comments_args);
 
 $args = array(
-	'name'          => __( 'Sidebar name', 'TripleC' ),
+	'name'          => __( 'Sidebar name', 'triplec' ),
 	'id'            => 'unique-sidebar-id',
 	'description'   => '',
         'class'         => '',
@@ -134,8 +154,8 @@ $args = array(
 	'after_title'   => '</h2>' ); 
 
 
-add_filter( 'wp_title', 'custom_titles', 10, 2 );
-function custom_titles( $title, $sep ) {
+add_filter( 'wp_title', 'triplec_custom_titles', 10, 2 );
+function triplec_custom_titles( $title, $sep ) {
 
     //Check if custom titles are enabled from your option framework
     if ( ot_get_option( 'enable_custom_titles' ) === 'on' ) {
@@ -181,13 +201,15 @@ $comments_args = array(
         // remove "Text or HTML to be displayed after the set of comment fields"
         'comment_notes_after' => '',
         // redefine your own textarea (the comment body)
-        'comment_field' => '<p class="comment-form-comment"><label for="comment">' . _x( 'Comment', 'noun' ) . '</label><br /><textarea id="comment" name="comment" aria-required="true"></textarea></p>',
+        'comment_field' => '<p class="comment-form-comment"><label for="comment">' . __( 'Comment', 'triplec' ) . '</label><br /><textarea id="comment" name="comment" aria-required="true"></textarea></p>',
 );
 
 comment_form($comments_args);
 
-function comicpress_copyright() {
+function triplec_comicpress_copyright() {
 global $wpdb;
+
+
 $copyright_dates = $wpdb->get_results("
 SELECT
 YEAR(min(post_date_gmt)) AS firstdate,
