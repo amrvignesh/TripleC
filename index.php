@@ -63,7 +63,7 @@ foreach(get_the_category() as $category)
 
 </div></div>
  <?php endwhile; else: ?>
-<p><?php _e('Sorry, no posts matched your criteria.','TripleC'); ?></p><?php endif; ?>
+<p><?php __('Sorry, no posts matched your criteria.','triplec'); ?></p><?php endif; ?>
 </div>
 
 <div class="slled2">
