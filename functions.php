@@ -2,8 +2,8 @@
 function register_my_menus() {
   register_nav_menus(
     array(
-      'header-menu' => __( 'Header Menu','TripleC' ),
-      'extra-menu' => __( 'Extra Menu','TripleC' )
+      'header-menu' => __( 'Header Menu','triplec' ),
+      'extra-menu' => __( 'Extra Menu','triplec' )
     )
   );
 }
@@ -25,13 +25,13 @@ function blm_init_method() {
 	function themeslug_theme_customizer( $wp_customize ) {
 		
     $wp_customize->add_section( 'themeslug_logo_section' , array(
-    'title'       => __( 'Logo', 'TripleC' ),
+    'title'       => __( 'Logo', 'triplec' ),
     'priority'    => 30,
     'description' => 'Upload a logo to replace the default site name and description in the header',
 ) );
    $wp_customize->add_setting( 'themeslug_logo', 'sanitize_callback' => 'esc_attr' );
    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'themeslug_logo', array(
-    'label'    => __( 'Logo', 'TripleC' ),
+    'label'    => __( 'Logo', 'triplec' ),
     'section'  => 'themeslug_logo_section',
     'settings' => 'themeslug_logo'
 ) ) );
