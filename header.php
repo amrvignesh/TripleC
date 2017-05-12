@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?>
 	<?php wp_head();?>
-	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
-	<script src="js/jquery.jss"></script>
+	
+	
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -20,22 +20,8 @@
 	
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	
-	<script>
-// In order to use WordPress's built-in Jquery, you need to use jQuery and can't use $
-//http://codex.wordpress.org/Function_Reference/wp_enqueue_script
-
-	jQuery(document).ready(function($){ 
-		$('#slides').slides({
-			preload: true,
-			preloadImage: '<?php echo get_template_directory_uri(); ?>/images/loading.gif',
-			play: 5000, // change this to make it go faster or slower
-			pause: 2500, //change this to pause more or less
-			hoverPause: true,
-			pagination: false
 	
-		});
-	});
-</script>
+
 </head>
 
 <body <?php body_class(); ?>>
